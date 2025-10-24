@@ -19,6 +19,8 @@ public class FacultyDirectory {
     
   Business business;
  
+    Business business;
+ 
     ArrayList<FacultyProfile> facultylist;
     public FacultyDirectory(Business d) {
         business = d;
