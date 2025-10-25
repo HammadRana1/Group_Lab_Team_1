@@ -6,6 +6,8 @@
 package Business.Profiles;
 
 import Business.Person.Person;
+import Business.University.CourseSchedule.CourseLoad;  
+import java.util.ArrayList; 
 
 /**
  *
@@ -14,11 +16,13 @@ import Business.Person.Person;
 public class StudentProfile extends Profile {
 
     Person person;
+    public ArrayList<CourseLoad> courseLoads;
 //    Transcript transcript;
     //   EmploymentHistroy employmenthistory;
 
     public StudentProfile(Person p) {
         super(p);
+        courseLoads = new ArrayList<>();
 
 //        transcript = new Transcript(this);
 //        employmenthistory = new EmploymentHistroy();

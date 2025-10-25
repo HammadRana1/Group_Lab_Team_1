@@ -388,16 +388,16 @@ private void populateTable() {
         }
     }
 
-    private Business.Profiles.StudentProfile findStudentByCourseLoad(Business.University.CourseSchedule.CourseLoad cl) {
-        for (Business.Profiles.StudentProfile sp : business.getStudentDirectory().getStudentList()) {
-            if (sp.courseLoads != null) {
-                for (Business.University.CourseSchedule.CourseLoad courseLoad : sp.courseLoads) {
-                    if (courseLoad == cl) return sp;
-                }
+    private StudentProfile findStudentByCourseLoad(CourseLoad cl) {
+    for (StudentProfile sp : business.getStudentDirectory().getStudentList()) {
+        if (sp.courseLoads != null) {
+            for (CourseLoad courseLoad : sp.courseLoads) {
+                if (courseLoad == cl) return sp;
             }
         }
-        return null;
     }
+    return null;
+}
 
     private String calculateLetterGrade(float p) {
         if (p >= 93) return "A";
