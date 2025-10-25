@@ -18,6 +18,7 @@ import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.CourseManagemen
 import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.ProfileManagement;  
 import Business.Profiles.FacultyProfile;
 import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.StudentManagement;
+import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.PerformanceReporting;
 /**
  *
  * @author kal
@@ -203,6 +204,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceActionPerformed
         // TODO add your handling code here:
+        PerformanceReporting pr = new PerformanceReporting(CardSequencePanel, business, facultyProfile);
+    CardSequencePanel.add("PerformanceReporting", pr);
+    ((java.awt.CardLayout) CardSequencePanel.getLayout()).show(CardSequencePanel, "PerformanceReporting");
 
 }//GEN-LAST:event_btnPerformanceActionPerformed
 
