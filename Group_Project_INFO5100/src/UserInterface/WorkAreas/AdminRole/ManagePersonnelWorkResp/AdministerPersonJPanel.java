@@ -71,7 +71,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 290, 74, 23);
+        Back.setBounds(30, 310, 74, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage Person Profile");
@@ -98,11 +98,11 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
 
         lblRole.setText("Role:");
         add(lblRole);
-        lblRole.setBounds(20, 170, 37, 20);
+        lblRole.setBounds(20, 180, 37, 20);
 
         CBRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Faculty", "Student", " " }));
         add(CBRole);
-        CBRole.setBounds(100, 170, 110, 22);
+        CBRole.setBounds(100, 180, 110, 20);
 
         btnRegisterPerson.setText("Register Person");
         btnRegisterPerson.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +111,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             }
         });
         add(btnRegisterPerson);
-        btnRegisterPerson.setBounds(30, 220, 120, 23);
+        btnRegisterPerson.setBounds(30, 240, 120, 23);
 
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,7 +136,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             }
         });
         add(btnDelete);
-        btnDelete.setBounds(380, 220, 72, 23);
+        btnDelete.setBounds(380, 240, 72, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed

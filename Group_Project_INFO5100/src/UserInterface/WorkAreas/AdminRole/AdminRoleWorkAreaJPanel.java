@@ -13,6 +13,8 @@ package UserInterface.WorkAreas.AdminRole;
 import Business.Business;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import UserInterface.WorkAreas.AdminRole.ManageStudentsWorkResp.ManageStudentsJPanel;
+import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
@@ -28,7 +30,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UnitRiskWorkArea
      */
-
     public AdminRoleWorkAreaJPanel(Business b, JPanel clp) {
 
         business = b;
@@ -181,6 +182,10 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        //RijurikSaha_StudentPanel-25/10
+        ManageStudentsJPanel msjp = new ManageStudentsJPanel(business, CardSequencePanel);
+        CardSequencePanel.add("ManageStudentsJPanel", msjp);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton8ActionPerformed
 

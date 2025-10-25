@@ -22,8 +22,16 @@ public class PersonDirectory {
     }
 
     //RijurikSaha-RegisterPerson-10/24
+    // For Admin or Faculty
     public Person newPerson(String id, String name, String email, String department, String role) {
         Person p = new Person(id, name, email, department, role);
+        personlist.add(p);
+        return p;
+    }
+    
+    //For Student
+    public Person newPerson(String id, String name, String email, String department, String role, String contact, String academicStatus) {
+        Person p = new Person(id, name, email, department, role, contact, academicStatus);
         personlist.add(p);
         return p;
     }

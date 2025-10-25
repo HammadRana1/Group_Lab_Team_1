@@ -17,12 +17,14 @@ public class Person {
     private String email;
     private String department;
     private String role;
+    private String contact;
+    private String academicStatus;
 
     public Person(String id) {
 
         this.id = id;
     }
-
+//Universal constructor for faculty, admin
     public Person(String id, String name, String email, String department, String role) {
         this.id = id;
         this.name = name;
@@ -30,13 +32,18 @@ public class Person {
         this.department = department;
         this.role = role;
     }
+//only for student
+    public Person(String id, String name, String email, String department, String role, String contact, String academicStatus) {
+        this(id, name, email, department, role);
+        this.contact = contact;
+        this.academicStatus = academicStatus;
+    }
 
     public String getPersonId() {
         return id;
     }
-    
+
     //RijurikSaha-RegisterPerson-10/24
-    
     public String getName() {
         return name;
     }
@@ -53,15 +60,22 @@ public class Person {
         return role;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public String getAcademicStatus() {
+        return academicStatus;
+    }
+
     public boolean isMatch(String id) {
         if (getPersonId().equals(id)) {
             return true;
         }
         return false;
     }
-    
+
     //RijurikSaha-RegisterPerson-10/24
-    
     public void setName(String name) {
         this.name = name;
     }
@@ -77,6 +91,15 @@ public class Person {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setAcademicStatus(String academicStatus) {
+        this.academicStatus = academicStatus;
+    }
+
     @Override
     public String toString() {
         return getPersonId();
