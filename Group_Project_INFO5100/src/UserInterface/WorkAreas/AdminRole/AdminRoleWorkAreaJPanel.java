@@ -17,6 +17,7 @@ import UserInterface.WorkAreas.AdminRole.ManageStudentsWorkResp.ManageStudentsJP
 import java.awt.CardLayout;
 import UserInterface.WorkAreas.AdminRole.ManageFacultyWorkResp.ManageFacultyJPanel;
 import Business.UserAccounts.UserAccount;
+import UserInterface.WorkAreas.AdminRole.AnalyticsWorkResp.AnalyticsDashboardJPanel;
 import UserInterface.WorkAreas.AdminRole.MyProfileWorkResp.MyProfileJPanel;
 
 import javax.swing.JPanel;
@@ -56,6 +57,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         jButton10 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         btnMyProfile = new javax.swing.JButton();
+        btnMyProfile1 = new javax.swing.JButton();
 
         setForeground(new java.awt.Color(51, 51, 51));
 
@@ -129,6 +131,20 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnMyProfile1.setBackground(new java.awt.Color(102, 153, 255));
+        btnMyProfile1.setFont(getFont());
+        btnMyProfile1.setForeground(new java.awt.Color(255, 255, 255));
+        btnMyProfile1.setText("Analytics Dashboard");
+        btnMyProfile1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMyProfile1.setMaximumSize(new java.awt.Dimension(200, 40));
+        btnMyProfile1.setMinimumSize(new java.awt.Dimension(20, 20));
+        btnMyProfile1.setPreferredSize(new java.awt.Dimension(240, 25));
+        btnMyProfile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMyProfile1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,15 +152,14 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMyProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(632, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -159,7 +174,9 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(btnMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMyProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -206,9 +223,18 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnMyProfileActionPerformed
 
+    private void btnMyProfile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfile1ActionPerformed
+        // TODO add your handling code here:
+
+        AnalyticsDashboardJPanel adp = new AnalyticsDashboardJPanel(business, CardSequencePanel);
+        CardSequencePanel.add("AnalyticsDashboardJPanel", adp);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnMyProfile1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMyProfile;
+    private javax.swing.JButton btnMyProfile1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
