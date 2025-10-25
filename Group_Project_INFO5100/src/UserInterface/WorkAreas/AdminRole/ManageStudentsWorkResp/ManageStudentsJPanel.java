@@ -58,6 +58,9 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
         lblStatus = new javax.swing.JLabel();
         btnDelete1 = new javax.swing.JButton();
         CBStatus = new javax.swing.JComboBox<>();
+        SearchValueField2 = new javax.swing.JTextField();
+        BtnSearch = new javax.swing.JButton();
+        CBSearchFaculty = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -166,6 +169,32 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
         });
         add(CBStatus);
         CBStatus.setBounds(90, 280, 150, 30);
+
+        SearchValueField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchValueField2ActionPerformed(evt);
+            }
+        });
+        add(SearchValueField2);
+        SearchValueField2.setBounds(410, 220, 150, 30);
+
+        BtnSearch.setText("Search");
+        BtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSearchActionPerformed(evt);
+            }
+        });
+        add(BtnSearch);
+        BtnSearch.setBounds(570, 220, 100, 30);
+
+        CBSearchFaculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search By Name", "Search By ID", "Search By Department" }));
+        CBSearchFaculty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBSearchFacultyActionPerformed(evt);
+            }
+        });
+        add(CBSearchFaculty);
+        CBSearchFaculty.setBounds(250, 220, 150, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -275,6 +304,72 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
             CBStatus.setSelectedItem(tblStudents.getValueAt(selectedRow, 5).toString());
         }
     }//GEN-LAST:event_tblStudentsMouseClicked
+
+    private void SearchValueField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchValueField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchValueField2ActionPerformed
+
+    private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
+        // TODO add your handling code here:
+        String keyword = SearchValueField2.getText().trim().toLowerCase();
+        String searchType = CBSearchFaculty.getSelectedItem().toString();
+
+        // If empty: just reload everything
+        if (keyword.isEmpty()) {
+            populateTable();
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
+        model.setRowCount(0);
+
+        int matches = 0;
+
+        // Search in PersonDirectory but only students
+        for (Person p : business.getPersonDirectory().getPersonList()) {
+            if (!"Student".equalsIgnoreCase(p.getRole())) {
+                continue;
+            }
+
+            boolean match = false;
+            switch (searchType) {
+                case "Search By ID":
+                    match = p.getPersonId() != null && p.getPersonId().toLowerCase().contains(keyword);
+                    break;
+                case "Search By Name":
+                    match = p.getName() != null && p.getName().toLowerCase().contains(keyword);
+                    break;
+                case "Search By Department":
+                    match = p.getDepartment() != null && p.getDepartment().toLowerCase().contains(keyword);
+                    break;
+                default:
+                    // Fallback: treat as show all
+                    match = true;
+            }
+
+            if (match) {
+                model.addRow(new Object[]{
+                    p.getPersonId(),
+                    p.getName(),
+                    p.getEmail(),
+                    p.getDepartment(),
+                    p.getContact(),
+                    p.getAcademicStatus()
+                });
+                matches++;
+            }
+        }
+
+        if (matches == 0) {
+            JOptionPane.showMessageDialog(this, "No matching student records found.");
+            // Restore full list so the table isn't left empty
+            populateTable();
+        }
+    }//GEN-LAST:event_BtnSearchActionPerformed
+
+    private void CBSearchFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBSearchFacultyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBSearchFacultyActionPerformed
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
         model.setRowCount(0);
@@ -305,12 +400,17 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JButton BtnSearch;
+    private javax.swing.JComboBox<String> CBSearchFaculty;
     private javax.swing.JComboBox<String> CBStatus;
     private javax.swing.JTextField ContactField;
     private javax.swing.JTextField DepartmentField;
     private javax.swing.JTextField EmailField;
     private javax.swing.JTextField IDField;
     private javax.swing.JTextField NameField;
+    private javax.swing.JTextField SearchValueField;
+    private javax.swing.JTextField SearchValueField1;
+    private javax.swing.JTextField SearchValueField2;
     private javax.swing.JButton btnAddStudent;
     private javax.swing.JButton btnDelete1;
     private javax.swing.JButton btnUpdate;
