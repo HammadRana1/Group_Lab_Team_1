@@ -57,13 +57,16 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         lblDepartments = new javax.swing.JLabel();
         DepartmentField = new javax.swing.JTextField();
         lblContacts = new javax.swing.JLabel();
-        ContactField = new javax.swing.JTextField();
+        SearchValueField = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
         btnDelete1 = new javax.swing.JButton();
         CBStatus = new javax.swing.JComboBox<>();
         lblCourse = new javax.swing.JLabel();
         CBCourse = new javax.swing.JComboBox<>();
         btnUpdate1 = new javax.swing.JButton();
+        BtnSearch = new javax.swing.JButton();
+        CBSearchFaculty = new javax.swing.JComboBox<>();
+        ContactField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -148,8 +151,14 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         lblContacts.setText("Contact:");
         add(lblContacts);
         lblContacts.setBounds(20, 240, 70, 30);
-        add(ContactField);
-        ContactField.setBounds(90, 240, 150, 30);
+
+        SearchValueField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchValueFieldActionPerformed(evt);
+            }
+        });
+        add(SearchValueField);
+        SearchValueField.setBounds(410, 220, 150, 30);
 
         lblStatus.setText("Status:");
         add(lblStatus);
@@ -194,6 +203,26 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         });
         add(btnUpdate1);
         btnUpdate1.setBounds(180, 400, 72, 23);
+
+        BtnSearch.setText("Search");
+        BtnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSearchActionPerformed(evt);
+            }
+        });
+        add(BtnSearch);
+        BtnSearch.setBounds(570, 220, 100, 30);
+
+        CBSearchFaculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Search By Name", "Search By ID", "Search By Department" }));
+        CBSearchFaculty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBSearchFacultyActionPerformed(evt);
+            }
+        });
+        add(CBSearchFaculty);
+        CBSearchFaculty.setBounds(250, 220, 150, 30);
+        add(ContactField1);
+        ContactField1.setBounds(90, 240, 150, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back2ActionPerformed
@@ -209,7 +238,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         String name = NameField.getText().trim();
         String email = EmailField.getText().trim();
         String dept = DepartmentField.getText().trim();
-        String contact = ContactField.getText().trim();
+        String contact = ContactField1.getText().trim();
         String status = CBStatus.getSelectedItem().toString();
 
         if (id.isEmpty() || name.isEmpty() || email.isEmpty() || dept.isEmpty() || contact.isEmpty()) {
@@ -274,7 +303,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             NameField.setText(tblStudents.getValueAt(selectedRow, 1).toString());
             EmailField.setText(tblStudents.getValueAt(selectedRow, 2).toString());
             DepartmentField.setText(tblStudents.getValueAt(selectedRow, 3).toString());
-            ContactField.setText(tblStudents.getValueAt(selectedRow, 4).toString());
+            SearchValueField.setText(tblStudents.getValueAt(selectedRow, 4).toString());
             CBStatus.setSelectedItem(tblStudents.getValueAt(selectedRow, 5).toString());
         }
     }//GEN-LAST:event_tblStudentsMouseClicked
@@ -330,7 +359,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             existing.setName(NameField.getText().trim());
             existing.setEmail(EmailField.getText().trim());
             existing.setDepartment(DepartmentField.getText().trim());
-            existing.setContact(ContactField.getText().trim());
+            existing.setContact(ContactField1.getText().trim());
             existing.setAcademicStatus(CBStatus.getSelectedItem().toString());
 
             JOptionPane.showMessageDialog(this, "Faculty details updated successfully!");
@@ -340,6 +369,78 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Faculty not found!");
         }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
+
+    private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
+        // TODO add your handling code here:
+        String keyword = SearchValueField.getText().trim().toLowerCase();
+        String searchType = CBSearchFaculty.getSelectedItem().toString();
+
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a search keyword!");
+            populateTable(); // reload all records
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
+        model.setRowCount(0);
+
+        for (FacultyProfile fp : business.getFacultyDirectory().getFacultyList()) {
+            Person p = fp.getPerson();
+
+            boolean match = false;
+            switch (searchType) {
+                case "Search By ID":
+                    if (p.getPersonId().toLowerCase().contains(keyword)) {
+                        match = true;
+                    }
+                    break;
+                case "Search By Name":
+                    if (p.getName().toLowerCase().contains(keyword)) {
+                        match = true;
+                    }
+                    break;
+                case "Search By Department":
+                    if (p.getDepartment().toLowerCase().contains(keyword)) {
+                        match = true;
+                    }
+                    break;
+            }
+
+            if (match) {
+                // Get all assigned courses
+                StringBuilder courses = new StringBuilder();
+                for (CourseOffer co : fp.getCourseOfferings()) {
+                    courses.append(co.toString()).append(", ");
+                }
+                String courseDisplay = courses.length() > 0 ? courses.substring(0, courses.length() - 2) : "None";
+
+                model.addRow(new Object[]{
+                    p.getPersonId(),
+                    p.getName(),
+                    p.getEmail(),
+                    p.getDepartment(),
+                    p.getContact(),
+                    p.getAcademicStatus(),
+                    courseDisplay
+                });
+            }
+        }
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No matching records found.");
+        }
+        
+        SearchValueField.setText("");
+
+    }//GEN-LAST:event_BtnSearchActionPerformed
+
+    private void CBSearchFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBSearchFacultyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBSearchFacultyActionPerformed
+
+    private void SearchValueFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchValueFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchValueFieldActionPerformed
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblStudents.getModel();
@@ -383,7 +484,8 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         NameField.setText("");
         EmailField.setText("");
         DepartmentField.setText("");
-        ContactField.setText("");
+        ContactField1.setText("");
+        SearchValueField.setText("");
         CBStatus.setSelectedIndex(0);
         CBCourse.setSelectedIndex(0);
     }
@@ -392,13 +494,16 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     private javax.swing.JButton Back;
     private javax.swing.JButton Back1;
     private javax.swing.JButton Back2;
+    private javax.swing.JButton BtnSearch;
     private javax.swing.JComboBox<String> CBCourse;
+    private javax.swing.JComboBox<String> CBSearchFaculty;
     private javax.swing.JComboBox<String> CBStatus;
-    private javax.swing.JTextField ContactField;
+    private javax.swing.JTextField ContactField1;
     private javax.swing.JTextField DepartmentField;
     private javax.swing.JTextField EmailField;
     private javax.swing.JTextField IDField;
     private javax.swing.JTextField NameField;
+    private javax.swing.JTextField SearchValueField;
     private javax.swing.JButton btnAddFaculty;
     private javax.swing.JButton btnAssignCourse;
     private javax.swing.JButton btnDelete1;
