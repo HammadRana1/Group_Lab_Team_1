@@ -17,6 +17,7 @@ public class StudentProfile extends Profile {
 
     Person person;
     public ArrayList<CourseLoad> courseLoads;
+    private CourseLoad currentCourseLoad;
 //    Transcript transcript;
     //   EmploymentHistroy employmenthistory;
 
@@ -35,6 +36,16 @@ public class StudentProfile extends Profile {
 
     public boolean isMatch(String id) {
         return person.getPersonId().equals(id);
+    }
+    
+    public CourseLoad newCourseLoad(String semester) {
+        currentCourseLoad = new CourseLoad(semester);
+        courseLoads.add(currentCourseLoad);
+        return currentCourseLoad;
+    }
+    
+    public CourseLoad getCurrentCourseLoad() {
+        return currentCourseLoad;
     }
 
 }

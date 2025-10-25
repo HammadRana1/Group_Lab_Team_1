@@ -63,5 +63,9 @@ public class Business {
     public FacultyDirectory getFacultyDirectory(){
         return facultydirectory;
     }
+    
+    public Department getDepartment() {
+    return department;
+    }
 
 }

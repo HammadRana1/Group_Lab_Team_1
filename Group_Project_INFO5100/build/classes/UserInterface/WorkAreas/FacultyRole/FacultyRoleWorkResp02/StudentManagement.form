@@ -208,11 +208,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="View Transcript"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewTranscriptActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnGradeAssignment">
       <Properties>
         <Property name="text" type="java.lang.String" value="Grade Assignment"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGradeAssignmentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCalculateGrade">
       <Properties>

@@ -12,7 +12,7 @@ public class Seat {
     
     Boolean occupied; 
     int number;
-    SeatAssignment seatassignment; //links back to studentprofile
+    public SeatAssignment seatassignment;
     CourseOffer courseoffer;
     public Seat (CourseOffer co, int n){
         courseoffer = co;

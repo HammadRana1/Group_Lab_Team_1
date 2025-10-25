@@ -12,10 +12,10 @@ import Business.University.CourseCatalog.Course;
  */
 public class SeatAssignment {
     
-    float grade; //(Letter grade mappings: A=4.0, A-=3.7, B+=3.3, B=3.0, )
+    public float grade; //(Letter grade mappings: A=4.0, A-=3.7, B+=3.3, B=3.0, )
     Seat seat;
     boolean like; //true means like and false means not like
-    CourseLoad courseload;
+    public CourseLoad courseload;
     public SeatAssignment(CourseLoad cl, Seat s){
         seat = s;
         courseload = cl;
