@@ -12,20 +12,28 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class PersonDirectory {
-    
-      ArrayList<Person> personlist ;
-    
-      public PersonDirectory (){
-          
-       personlist = new ArrayList();
+
+    ArrayList<Person> personlist;
+
+    public PersonDirectory() {
+
+        personlist = new ArrayList();
 
     }
 
-    public Person newPerson(String id) {
-
-        Person p = new Person(id);
+    //RijurikSaha-RegisterPerson-10/24
+    public Person newPerson(String id, String name, String email, String department, String role) {
+        Person p = new Person(id, name, email, department, role);
         personlist.add(p);
         return p;
+    }
+
+    public ArrayList<Person> getPersonList() {
+        return personlist;
+    }
+
+    public void removePerson(Person p) {
+        personlist.remove(p);
     }
 
     public Person findPerson(String id) {
@@ -36,7 +44,7 @@ public class PersonDirectory {
                 return p;
             }
         }
-            return null; //not found after going through the whole list
-         }
-    
+        return null; //not found after going through the whole list
+    }
+
 }

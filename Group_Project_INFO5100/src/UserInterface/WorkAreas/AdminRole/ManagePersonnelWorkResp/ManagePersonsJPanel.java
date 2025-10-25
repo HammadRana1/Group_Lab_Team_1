@@ -7,7 +7,6 @@ package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
 
-
 import javax.swing.JPanel;
 
 /**
@@ -22,14 +21,12 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     Business business;
 
-
     public ManagePersonsJPanel(Business bz, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,16 +77,17 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
- //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
+        //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
 
     }//GEN-LAST:event_BackActionPerformed
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
-        
+
         AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, CardSequencePanel);
-        CardSequencePanel.add(mppd);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        CardSequencePanel.add("AdministerPersonJPanel", mppd);
+        java.awt.CardLayout layout = (java.awt.CardLayout) CardSequencePanel.getLayout();
+        layout.next(CardSequencePanel);
 
     }//GEN-LAST:event_NextActionPerformed
 

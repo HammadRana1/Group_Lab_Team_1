@@ -6,6 +6,9 @@
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
+import Business.Person.Person;
+import javax.swing.table.DefaultTableModel;
+
 
 import javax.swing.JPanel;
 
@@ -27,8 +30,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
-
-
+        populateTable();
     }
 
     public void refreshTable() {
@@ -46,6 +48,18 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
 
         Back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        NameField = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        EmailField = new javax.swing.JTextField();
+        lblDepartment = new javax.swing.JLabel();
+        DepartmentField = new javax.swing.JTextField();
+        lblRole = new javax.swing.JLabel();
+        CBRole = new javax.swing.JComboBox<>();
+        btnRegisterPerson = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -57,12 +71,72 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 290, 76, 32);
+        Back.setBounds(30, 290, 74, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage Person Profile");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
+        add(NameField);
+        NameField.setBounds(100, 80, 110, 20);
+
+        lblName.setText("Name");
+        add(lblName);
+        lblName.setBounds(20, 80, 37, 20);
+
+        lblEmail.setText("Email:");
+        add(lblEmail);
+        lblEmail.setBounds(20, 110, 37, 20);
+        add(EmailField);
+        EmailField.setBounds(100, 110, 110, 20);
+
+        lblDepartment.setText("Department:");
+        add(lblDepartment);
+        lblDepartment.setBounds(20, 140, 80, 20);
+        add(DepartmentField);
+        DepartmentField.setBounds(100, 140, 110, 20);
+
+        lblRole.setText("Role:");
+        add(lblRole);
+        lblRole.setBounds(20, 170, 37, 20);
+
+        CBRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Faculty", "Student", " " }));
+        add(CBRole);
+        CBRole.setBounds(100, 170, 110, 22);
+
+        btnRegisterPerson.setText("Register Person");
+        btnRegisterPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterPersonActionPerformed(evt);
+            }
+        });
+        add(btnRegisterPerson);
+        btnRegisterPerson.setBounds(30, 220, 120, 23);
+
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "University ID", "Name", "Email", "Department"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(220, 70, 400, 130);
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete);
+        btnDelete.setBounds(380, 220, 72, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -73,10 +147,95 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_BackActionPerformed
 
+    private void btnRegisterPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPersonActionPerformed
+        // TODO add your handling code here:
+        //RijurikSaha-RegisterPerson-10/24
+        String name = NameField.getText().trim();
+        String email = EmailField.getText().trim();
+        String dept = DepartmentField.getText().trim();
+        String role = CBRole.getSelectedItem().toString();
+
+        // Basic validation
+        if (name.isEmpty() || email.isEmpty() || dept.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill all fields!");
+            return;
+        }
+
+        // Auto-generate a new ID (simple incremental logic)
+        String id = "P" + (business.getPersonDirectory().getPersonList().size() + 1);
+
+        // Create and store the new person
+        business.getPersonDirectory().newPerson(id, name, email, dept, role);
+
+        // Update the table
+        populateTable();
+
+        // Confirmation message
+        javax.swing.JOptionPane.showMessageDialog(this, "Person registered successfully!");
+
+        // Clear input fields
+        NameField.setText("");
+        EmailField.setText("");
+        DepartmentField.setText("");
+        CBRole.setSelectedIndex(0);
+    }//GEN-LAST:event_btnRegisterPersonActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        //RijurikSaha-RegisterPerson-10/24
+        int selectedRow = tbl.getSelectedRow();
+        if (selectedRow < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a person to delete!");
+            return;
+        }
+
+        String id = tbl.getValueAt(selectedRow, 0).toString();
+
+        Person toDelete = null;
+        for (Person p : business.getPersonDirectory().getPersonList()) {
+            if (p.getPersonId().equals(id)) {
+                toDelete = p;
+                break;
+            }
+        }
+
+        if (toDelete != null) {
+            business.getPersonDirectory().removePerson(toDelete);
+            populateTable();
+            javax.swing.JOptionPane.showMessageDialog(this, "Person deleted successfully!");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+    //RijurikSaha-RegisterPerson-10/24
+    private void populateTable() {
+        javax.swing.table.DefaultTableModel model
+                = (javax.swing.table.DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+
+        for (Person p : business.getPersonDirectory().getPersonList()) {
+            Object[] row = new Object[4];
+            row[0] = p.getPersonId();
+            row[1] = p.getName();
+            row[2] = p.getEmail();
+            row[3] = p.getDepartment();
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JComboBox<String> CBRole;
+    private javax.swing.JTextField DepartmentField;
+    private javax.swing.JTextField EmailField;
+    private javax.swing.JTextField NameField;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRegisterPerson;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDepartment;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblRole;
+    private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 
 }
