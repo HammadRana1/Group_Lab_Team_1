@@ -279,6 +279,11 @@ private void populateTable() {
         });
 
         btnCalculateGrade.setText("Calculate Grade");
+        btnCalculateGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculateGradeActionPerformed(evt);
+            }
+        });
 
         btnViewProgress.setText("View Progress Report");
 
@@ -523,6 +528,23 @@ private void populateTable() {
         JOptionPane.showMessageDialog(this, "Invalid grade! Enter a number between 0-100.");
     }
     }//GEN-LAST:event_btnGradeAssignmentActionPerformed
+
+    private void btnCalculateGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateGradeActionPerformed
+        // TODO add your handling code here:
+       String selectedCourse = (String) jComboCourseSelection.getSelectedItem();
+    
+    AssignmentGradingJPanel agp = new AssignmentGradingJPanel(
+        userProcessContainer, 
+        business, 
+        facultyProfile,
+        (DefaultTableModel) jTable1.getModel(),  // ✓ Pass table model
+        selectedCourse  // ✓ Pass selected course
+    );
+    
+    userProcessContainer.add("AssignmentGrading", agp);
+    ((java.awt.CardLayout) userProcessContainer.getLayout()).show(userProcessContainer, "AssignmentGrading");
+        
+    }//GEN-LAST:event_btnCalculateGradeActionPerformed
 
     
      private class StudentGradeData {
