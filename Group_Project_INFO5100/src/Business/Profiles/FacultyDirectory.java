@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class FacultyDirectory {
     
     
-  Business business;
+ 
  
     Business business;
  
