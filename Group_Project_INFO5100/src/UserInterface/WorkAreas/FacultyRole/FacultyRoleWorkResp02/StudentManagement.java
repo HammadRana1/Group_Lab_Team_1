@@ -186,8 +186,7 @@ private void populateTable() {
             .average()
             .orElse(0.0);
         
-        System.out.println("Loaded " + studentGrades.size() + " students for " + selectedCourse);
-        System.out.println("Class GPA: " + String.format("%.2f", classGPA));
+     
         
         jComboFilterResults.setSelectedIndex(0);
         
