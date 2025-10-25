@@ -227,7 +227,73 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
     //Rijurik_Saha_UpdateBtn-24/10
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        //Rijurik_Saha-24/10
 
+        int selectedRow = UserAccountTable.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a user account to update!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Get selected user account
+        UserAccount selectedAccount = (UserAccount) UserAccountTable.getValueAt(selectedRow, 0);
+
+        // Ask for new username
+        String newUsername = JOptionPane.showInputDialog(null, "Enter new username:", selectedAccount.getUserLoginName());
+        if (newUsername == null || newUsername.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username cannot be empty!");
+            return;
+        }
+
+        // Ask for new password
+        String newPassword = JOptionPane.showInputDialog(null, "Enter new password:");
+        if (newPassword == null || newPassword.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty!");
+            return;
+        }
+
+        // Ask for new role
+        String[] roles = {"Admin", "Faculty", "Student"};
+        String newRole = (String) JOptionPane.showInputDialog(
+                null,
+                "Select new role:",
+                "Role Update",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                roles,
+                selectedAccount.getRole()
+        );
+
+        if (newRole == null) {
+            JOptionPane.showMessageDialog(null, "Role selection cancelled!");
+            return;
+        }
+
+        // --- Update logic ---
+        selectedAccount.setUsername(newUsername);
+        selectedAccount.setPassword(newPassword);
+
+        // Update profile if role changed
+        if (!newRole.equalsIgnoreCase(selectedAccount.getRole())) {
+            Profile updatedProfile = null;
+            Person existingPerson = selectedAccount.getAssociatedPersonProfile().getPerson();
+
+            if (newRole.equalsIgnoreCase("Admin")) {
+                updatedProfile = new AdminProfile(existingPerson);
+            } else if (newRole.equalsIgnoreCase("Faculty")) {
+                updatedProfile = new FacultyProfile(existingPerson);
+            } else if (newRole.equalsIgnoreCase("Student")) {
+                updatedProfile = new StudentProfile(existingPerson);
+            }
+
+            selectedAccount.setProfile(updatedProfile);
+        }
+
+        // Refresh table to show updated info
+        refreshTable();
+
+        JOptionPane.showMessageDialog(null, "User account updated successfully!");
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
