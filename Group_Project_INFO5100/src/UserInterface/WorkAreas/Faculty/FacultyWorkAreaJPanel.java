@@ -19,6 +19,7 @@ import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.ProfileManageme
 import Business.Profiles.FacultyProfile;
 import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.StudentManagement;
 import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.PerformanceReporting;
+import UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02.TuitionInsight;
 /**
  *
  * @author kal
@@ -212,6 +213,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnTutionIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutionIdentifyEventsActionPerformed
         // TODO add your handling code here:
+     TuitionInsight ti = new TuitionInsight(CardSequencePanel, business, facultyProfile);
+    CardSequencePanel.add("TuitionInsight", ti);
+    ((java.awt.CardLayout) CardSequencePanel.getLayout()).show(CardSequencePanel, "TuitionInsight");
     }//GEN-LAST:event_btnTutionIdentifyEventsActionPerformed
 
 

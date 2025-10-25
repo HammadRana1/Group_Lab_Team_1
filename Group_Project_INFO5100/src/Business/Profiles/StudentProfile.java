@@ -6,7 +6,8 @@
 package Business.Profiles;
 
 import Business.Person.Person;
-import Business.University.CourseSchedule.CourseLoad;  
+import Business.University.CourseSchedule.CourseLoad; 
+import Business.University.CourseSchedule.SeatAssignment;
 import java.util.ArrayList; 
 
 /**
@@ -46,6 +47,16 @@ public class StudentProfile extends Profile {
     
     public CourseLoad getCurrentCourseLoad() {
         return currentCourseLoad;
+    }
+    
+    public ArrayList<SeatAssignment> getCourseList() {
+        ArrayList<SeatAssignment> allSeatAssignments = new ArrayList<>();
+        for (CourseLoad cl : courseLoads) {
+            if (cl != null && cl.getSeatAssignments() != null) {
+                allSeatAssignments.addAll(cl.getSeatAssignments());
+            }
+        }
+        return allSeatAssignments;
     }
 
 }
