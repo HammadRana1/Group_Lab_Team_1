@@ -228,13 +228,10 @@ private void populateTable() {
         btnViewTranscript = new javax.swing.JButton();
         btnGradeAssignment = new javax.swing.JButton();
         btnCalculateGrade = new javax.swing.JButton();
-        btnViewProgress = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblFilterResults = new javax.swing.JLabel();
         jComboFilterResults = new javax.swing.JComboBox<>();
-        btnAddStudent = new javax.swing.JButton();
-        btnDeleteStudent = new javax.swing.JButton();
 
         lblStudentManagement.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblStudentManagement.setText("Student Management ");
@@ -278,27 +275,31 @@ private void populateTable() {
             }
         });
 
-        btnCalculateGrade.setText("Calculate Grade");
+        btnCalculateGrade.setText("Calculate Grade & Progress Report");
         btnCalculateGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalculateGradeActionPerformed(evt);
             }
         });
 
-        btnViewProgress.setText("View Progress Report");
-
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         lblFilterResults.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFilterResults.setText("Filter Results");
 
         jComboFilterResults.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnAddStudent.setText("Add Student");
-
-        btnDeleteStudent.setText("Delete Student");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -318,26 +319,21 @@ private void populateTable() {
                         .addGap(18, 18, 18)
                         .addComponent(jComboFilterResults, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnViewStudents)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnViewTranscript, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGradeAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCalculateGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStudentManagement)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnAddStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewStudents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnViewTranscript, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(btnDeleteStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGradeAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCalculateGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnViewProgress)))
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -358,17 +354,12 @@ private void populateTable() {
                     .addComponent(btnViewStudents)
                     .addComponent(btnViewTranscript)
                     .addComponent(btnGradeAssignment)
-                    .addComponent(btnCalculateGrade)
-                    .addComponent(btnViewProgress))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddStudent)
-                    .addComponent(btnDeleteStudent))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnCalculateGrade))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogout)
                     .addComponent(btnBack))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -546,6 +537,26 @@ private void populateTable() {
         
     }//GEN-LAST:event_btnCalculateGradeActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(this, 
+        "Are you sure you want to logout?", 
+        "Confirm Logout", 
+        JOptionPane.YES_NO_OPTION);
+    
+    if (confirm == JOptionPane.YES_OPTION) {
+        userProcessContainer.removeAll();
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).first(userProcessContainer);
+        JOptionPane.showMessageDialog(this, "Logged out successfully!");
+    }
+        
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).show(userProcessContainer, "faculty");
+    }//GEN-LAST:event_btnBackActionPerformed
+
     
      private class StudentGradeData {
         String studentId, studentName, course, letterGrade;
@@ -603,7 +614,43 @@ private void populateTable() {
     }
 
     private void applyFilter() {
-        // Empty for now
+        String filter = (String) jComboFilterResults.getSelectedItem();
+    
+    if (filter == null || filter.equals("-- No Filter --")) {
+        return;
+    }
+    
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    java.util.List<Object[]> rows = new java.util.ArrayList<>();
+    
+    // Get all rows
+    for (int i = 0; i < model.getRowCount(); i++) {
+        Object[] row = {
+            model.getValueAt(i, 0), model.getValueAt(i, 1), model.getValueAt(i, 2),
+            model.getValueAt(i, 3), model.getValueAt(i, 4), model.getValueAt(i, 5),
+            model.getValueAt(i, 6)
+        };
+        rows.add(row);
+    }
+    
+    // Sort
+    if (filter.contains("High to Low")) {
+        rows.sort((a, b) -> Integer.compare(Integer.parseInt(b[3].toString()), Integer.parseInt(a[3].toString())));
+    } else if (filter.contains("Low to High")) {
+        rows.sort((a, b) -> Integer.compare(Integer.parseInt(a[3].toString()), Integer.parseInt(b[3].toString())));
+    } else if (filter.contains("Letter Grade")) {
+        rows.sort((a, b) -> a[4].toString().compareTo(b[4].toString()));
+    } else if (filter.contains("GPA")) {
+        rows.sort((a, b) -> Double.compare(Double.parseDouble(b[6].toString()), Double.parseDouble(a[6].toString())));
+    }
+    
+    // Update table
+    model.setRowCount(0);
+    for (Object[] row : rows) {
+        model.addRow(row);
+    }
+    
+    recalculateRanks();
     }
     
     private void recalculateRanks() {
@@ -652,13 +699,10 @@ private void populateTable() {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddStudent;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCalculateGrade;
-    private javax.swing.JButton btnDeleteStudent;
     private javax.swing.JButton btnGradeAssignment;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnViewProgress;
     private javax.swing.JButton btnViewStudents;
     private javax.swing.JButton btnViewTranscript;
     private javax.swing.JComboBox<String> jComboCourseSelection;

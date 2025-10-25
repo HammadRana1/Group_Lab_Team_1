@@ -31,30 +31,23 @@
                       <Component id="jComboFilterResults" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnLogout" min="-2" pref="322" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                      <Component id="btnBack" max="32767" attributes="0"/>
+                      <Component id="btnViewStudents" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnViewTranscript" pref="126" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnGradeAssignment" min="-2" pref="136" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnCalculateGrade" min="-2" pref="262" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lblStudentManagement" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnAddStudent" max="32767" attributes="0"/>
-                          <Component id="btnViewStudents" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnViewTranscript" pref="126" max="32767" attributes="0"/>
-                          <Component id="btnDeleteStudent" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnGradeAssignment" min="-2" pref="136" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCalculateGrade" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnViewProgress" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLogout" min="-2" pref="322" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                      <Component id="btnBack" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -81,19 +74,13 @@
                   <Component id="btnViewTranscript" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnGradeAssignment" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCalculateGrade" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnViewProgress" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAddStudent" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDeleteStudent" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnLogout" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <EmptySpace pref="103" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -222,26 +209,27 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCalculateGrade">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Calculate Grade"/>
+        <Property name="text" type="java.lang.String" value="Calculate Grade &amp; Progress Report"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalculateGradeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnViewProgress">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Progress Report"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnLogout">
       <Properties>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;&lt;Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFilterResults">
       <Properties>
@@ -265,16 +253,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAddStudent">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add Student"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnDeleteStudent">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete Student"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

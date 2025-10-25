@@ -275,6 +275,11 @@ public class AssignmentGradingJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Each Assignment has weightage of 20%");
@@ -412,6 +417,11 @@ public class AssignmentGradingJPanel extends javax.swing.JPanel {
     // Go back
     ((java.awt.CardLayout) userProcessContainer.getLayout()).show(userProcessContainer, "StudentManagement");
     }//GEN-LAST:event_btnExportActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).show(userProcessContainer, "StudentManagement");
+    }//GEN-LAST:event_btnBackActionPerformed
 private double calculateGPA(String grade) {
     switch (grade) {
         case "A": return 4.0;
