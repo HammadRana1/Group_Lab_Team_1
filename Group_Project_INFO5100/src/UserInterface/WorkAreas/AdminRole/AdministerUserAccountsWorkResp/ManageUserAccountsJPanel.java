@@ -8,6 +8,7 @@ package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 import Business.Business;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import javax.swing.JOptionPane;
 
 
 import javax.swing.JPanel;
@@ -79,6 +80,9 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         UserAccountTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -90,7 +94,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 76, 32);
+        Back.setBounds(30, 300, 74, 23);
 
         Next.setText("Next >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +103,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Next);
-        Next.setBounds(500, 300, 80, 32);
+        Next.setBounds(500, 300, 80, 23);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("User Accounts");
@@ -109,7 +113,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
 
         UserAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,6 +135,23 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(30, 110, 550, 130);
+
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1);
+        jButton1.setBounds(420, 250, 72, 23);
+
+        jButton2.setText("Update");
+        add(jButton2);
+        jButton2.setBounds(260, 250, 72, 23);
+
+        jButton3.setText("Create");
+        add(jButton3);
+        jButton3.setBounds(120, 250, 72, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -161,18 +182,49 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
         if (selecteduseraccount == null) {
             return;
-        
-        
-            
+        }
     }//GEN-LAST:event_UserAccountTableMousePressed
-    
+
+        //RijurikSaha_DeleteAccount-24/10
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+         int row = UserAccountTable.getSelectedRow();
+
+    if (row < 0) {
+        JOptionPane.showMessageDialog(null, "Please select a user account to delete!", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
     }
+
+    // Get the selected UserAccount object from the first column
+    UserAccount selectedAccount = (UserAccount) UserAccountTable.getValueAt(row, 0);
+
+    // Confirm deletion
+    int confirm = JOptionPane.showConfirmDialog(null,
+            "Are you sure you want to delete the selected user account?",
+            "Confirm Deletion",
+            JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        // Remove the selected user from the directory
+        business.getUserAccountDirectory().removeUserAccount(selectedAccount);
+
+        // Refresh the table to show updated data
+        refreshTable();
+
+        JOptionPane.showMessageDialog(null, "User account deleted successfully!");
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton Next;
     private javax.swing.JTable UserAccountTable;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
