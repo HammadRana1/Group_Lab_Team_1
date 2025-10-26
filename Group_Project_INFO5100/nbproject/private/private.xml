@@ -2,6 +2,25 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< Updated upstream
         <group/>
+=======
+        <group>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/Enrollment/EnrollmentService.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/University/CourseSchedule/CourseOffer.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/University/CourseCatalog/CourseCatalog.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/University/CourseSchedule/CourseSchedule.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/Billing/Account.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/Transcript/TranscriptRecord.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/University/Degree/Degree.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/Profiles/StudentProfile.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/UserInterface/WorkAreas/StudentRole/ManageProfileJPanel.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/UserInterface/WorkAreas/StudentRole/GraduationAuditJPanel.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/UserInterface/WorkAreas/StudentRole/StudentWorkAreaJPanel.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/UserInterface/WorkAreas/StudentRole/CourseRegistrationJPanel.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/ConfigureABusiness.java</file>
+            <file>file:/Users/syrillthevenin/Desktop/Group_Lab_Team_1/Group_Project_INFO5100/src/Business/Business.java</file>
+        </group>
+>>>>>>> Stashed changes
     </open-files>
 </project-private>
