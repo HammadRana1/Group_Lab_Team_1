@@ -1,7 +1,11 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //Thevenin_10-25-_"Referee_enforces_open_full_8_credit_cap_and_updates_billing"
 package Business.Enrollment;
 
+=======
+package Business.Enrollment;
+>>>>>>> Stashed changes
 =======
 package Business.Enrollment;
 >>>>>>> Stashed changes
@@ -9,6 +13,7 @@ import Business.University.CourseSchedule.CourseOffer;
 import Business.Profiles.StudentProfile;
 
 public class EnrollmentService {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
     //Thevenin_10-25-_"Check_if_enrollment_is_open_seat_available_and_<=8_credits"
@@ -33,6 +38,8 @@ public class EnrollmentService {
         s.dropFrom(o);
         o.decrement();
 =======
+=======
+>>>>>>> Stashed changes
     //Thevenin_10-25-_"Open? Seat? <=8 credits?"
     public boolean canEnroll(StudentProfile s, CourseOffer o) {
         if (!o.isEnrollmentOpen()) return false;
@@ -50,6 +57,9 @@ public class EnrollmentService {
     //Thevenin_10-25-_"Drop + refund"
     public void drop(StudentProfile s, CourseOffer o) {
         s.dropFrom(o); o.decrement();
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         s.getAccount().refund(o.getCourse().getCredits() * 1000.0,
                 "Refund " + o.getCourse().getCourseNumber());

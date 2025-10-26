@@ -3,16 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 package Business.Billing;
 
 import java.util.*;
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 /**
  *
  * @author syrillthevenin
  */
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
 //Thevenin_10-25-_"Tracks_balance_history_and_isClear_for_transcript_lock"
@@ -54,6 +61,8 @@ public class Account {
     }
 }
 =======
+=======
+>>>>>>> Stashed changes
 public class Account {
 
     public static class Entry {
@@ -70,4 +79,7 @@ public class Account {
 }
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
