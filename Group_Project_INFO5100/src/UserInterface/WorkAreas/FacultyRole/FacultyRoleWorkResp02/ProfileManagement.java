@@ -37,19 +37,19 @@ private Person person;
     
 private void populateTable() {
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0); // Clear existing rows
+    model.setRowCount(0);
     
     // Add current faculty member's data (logged-in user)
     Object[] row1 = new Object[6];
-    row1[0] = person.getPersonId(); // Full Name
-    row1[1] = "FAC-001"; // Faculty ID
-    row1[2] = person.getPersonId() + "@university.edu"; // Email
-    row1[3] = "555-0100"; // Phone Number
-    row1[4] = "Information Systems"; // Department
-    row1[5] = "Room 401"; // Office Location
+    row1[0] = person.getPersonId();
+    row1[1] = "FAC-001";
+    row1[2] = person.getPersonId() + "@university.edu";
+    row1[3] = "555-0100";
+    row1[4] = "Information Systems";
+    row1[5] = "Room 401";
     model.addRow(row1);
     
-    // Add more faculty data
+    // Add 9 more faculty members
     Object[] row2 = new Object[6];
     row2[0] = "Dr. Michael Anderson";
     row2[1] = "FAC-002";
@@ -76,6 +76,60 @@ private void populateTable() {
     row4[4] = "Information Systems";
     row4[5] = "Room 508";
     model.addRow(row4);
+    
+    Object[] row5 = new Object[6];
+    row5[0] = "Dr. Lisa Thompson";
+    row5[1] = "FAC-005";
+    row5[2] = "l.thompson@university.edu";
+    row5[3] = "555-0504";
+    row5[4] = "Software Engineering";
+    row5[5] = "Room 210";
+    model.addRow(row5);
+    
+    Object[] row6 = new Object[6];
+    row6[0] = "Dr. Robert Martinez";
+    row6[1] = "FAC-006";
+    row6[2] = "r.martinez@university.edu";
+    row6[3] = "555-0605";
+    row6[4] = "Cybersecurity";
+    row6[5] = "Room 315";
+    model.addRow(row6);
+    
+    Object[] row7 = new Object[6];
+    row7[0] = "Dr. Patricia Lee";
+    row7[1] = "FAC-007";
+    row7[2] = "p.lee@university.edu";
+    row7[3] = "555-0706";
+    row7[4] = "Data Science";
+    row7[5] = "Room 418";
+    model.addRow(row7);
+    
+    Object[] row8 = new Object[6];
+    row8[0] = "Dr. David Kim";
+    row8[1] = "FAC-008";
+    row8[2] = "d.kim@university.edu";
+    row8[3] = "555-0807";
+    row8[4] = "Machine Learning";
+    row8[5] = "Room 520";
+    model.addRow(row8);
+    
+    Object[] row9 = new Object[6];
+    row9[0] = "Dr. Maria Garcia";
+    row9[1] = "FAC-009";
+    row9[2] = "m.garcia@university.edu";
+    row9[3] = "555-0908";
+    row9[4] = "Information Systems";
+    row9[5] = "Room 302";
+    model.addRow(row9);
+    
+    Object[] row10 = new Object[6];
+    row10[0] = "Dr. John Wilson";
+    row10[1] = "FAC-010";
+    row10[2] = "j.wilson@university.edu";
+    row10[3] = "555-1009";
+    row10[4] = "Computer Science";
+    row10[5] = "Room 425";
+    model.addRow(row10);
 }
 
 private void loadFacultyData() {
