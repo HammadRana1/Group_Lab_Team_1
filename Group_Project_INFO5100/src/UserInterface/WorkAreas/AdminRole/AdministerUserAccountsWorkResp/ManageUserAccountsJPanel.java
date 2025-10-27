@@ -8,6 +8,12 @@ package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 import Business.Business;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import Business.Person.Person;
+import Business.Profiles.Profile;
+import Business.Profiles.AdminProfile;
+import Business.Profiles.FacultyProfile;
+import Business.Profiles.StudentProfile;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +30,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     Business business;
     UserAccount selecteduseraccount;
-    
+
     public ManageUserAccountsJPanel(Business bz, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
@@ -72,9 +78,9 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         UserAccountTable = new javax.swing.JTable();
-        btnCreate = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -128,9 +134,14 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(30, 110, 550, 130);
 
-        btnCreate.setText("Create");
-        add(btnCreate);
-        btnCreate.setBounds(100, 250, 72, 23);
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete);
+        btnDelete.setBounds(420, 250, 72, 23);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -139,16 +150,16 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(btnUpdate);
-        btnUpdate.setBounds(250, 250, 72, 23);
+        btnUpdate.setBounds(260, 250, 72, 23);
 
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnCreateActionPerformed(evt);
             }
         });
-        add(btnDelete);
-        btnDelete.setBounds(410, 250, 72, 23);
+        add(btnCreate);
+        btnCreate.setBounds(120, 250, 72, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -181,24 +192,17 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
         if (selecteduseraccount == null) {
             return;
-
         }
-
-
     }//GEN-LAST:event_UserAccountTableMousePressed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
+    //RijurikSaha_DeleteAccount-24/10
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
 
-        //RijurikSaha_DeleteBtn_24/10
         int row = UserAccountTable.getSelectedRow();
 
         if (row < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a user account to delete!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -221,8 +225,142 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "User account deleted successfully!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+    //Rijurik_Saha_UpdateBtn-24/10
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        //Rijurik_Saha-24/10
 
-    
+        int selectedRow = UserAccountTable.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a user account to update!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Get selected user account
+        UserAccount selectedAccount = (UserAccount) UserAccountTable.getValueAt(selectedRow, 0);
+
+        // Ask for new username
+        String newUsername = JOptionPane.showInputDialog(null, "Enter new username:", selectedAccount.getUserLoginName());
+        if (newUsername == null || newUsername.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username cannot be empty!");
+            return;
+        }
+
+        // Ask for new password
+        String newPassword = JOptionPane.showInputDialog(null, "Enter new password:");
+        if (newPassword == null || newPassword.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty!");
+            return;
+        }
+
+        // Ask for new role
+        String[] roles = {"Admin", "Faculty", "Student"};
+        String newRole = (String) JOptionPane.showInputDialog(
+                null,
+                "Select new role:",
+                "Role Update",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                roles,
+                selectedAccount.getRole()
+        );
+
+        if (newRole == null) {
+            JOptionPane.showMessageDialog(null, "Role selection cancelled!");
+            return;
+        }
+
+        // --- Update logic ---
+        selectedAccount.setUsername(newUsername);
+        selectedAccount.setPassword(newPassword);
+
+        // Update profile if role changed
+        if (!newRole.equalsIgnoreCase(selectedAccount.getRole())) {
+            Profile updatedProfile = null;
+            Person existingPerson = selectedAccount.getAssociatedPersonProfile().getPerson();
+
+            if (newRole.equalsIgnoreCase("Admin")) {
+                updatedProfile = new AdminProfile(existingPerson);
+            } else if (newRole.equalsIgnoreCase("Faculty")) {
+                updatedProfile = new FacultyProfile(existingPerson);
+            } else if (newRole.equalsIgnoreCase("Student")) {
+                updatedProfile = new StudentProfile(existingPerson);
+            }
+
+            selectedAccount.setProfile(updatedProfile);
+        }
+
+        // Refresh table to show updated info
+        refreshTable();
+
+        JOptionPane.showMessageDialog(null, "User account updated successfully!");
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        //RijurikSaha_Create_24/10
+        // Ask for username
+        String username = JOptionPane.showInputDialog(null, "Enter Username:");
+        if (username == null || username.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username cannot be empty!");
+            return;
+        }
+
+        // Ask for password
+        String password = JOptionPane.showInputDialog(null, "Enter Password:");
+        if (password == null || password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty!");
+            return;
+        }
+
+        // Ask for role selection
+        String[] roles = {"Admin", "Faculty", "Student"};
+        String selectedRole = (String) JOptionPane.showInputDialog(
+                null,
+                "Select Role:",
+                "Role Selection",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                roles,
+                roles[0]
+        );
+
+        if (selectedRole == null) {
+            JOptionPane.showMessageDialog(null, "Role selection cancelled!");
+            return;
+        }
+
+        // Access UserAccountDirectory
+        UserAccountDirectory uad = business.getUserAccountDirectory();
+
+        // Check for duplicate usernames
+        for (UserAccount ua : uad.getUserAccountList()) {
+            if (ua.getUserLoginName().equalsIgnoreCase(username)) {
+                JOptionPane.showMessageDialog(null, "Username already exists!");
+                return;
+            }
+        }
+
+        // Create a Profile object based on selected role
+        Profile profile = null;
+
+        if (selectedRole.equalsIgnoreCase("Admin")) {
+            profile = new AdminProfile(new Person(username));
+        } else if (selectedRole.equalsIgnoreCase("Faculty")) {
+            profile = new FacultyProfile(new Person(username));
+        } else if (selectedRole.equalsIgnoreCase("Student")) {
+            profile = new StudentProfile(new Person(username));
+        }
+
+        // Create new UserAccount
+        uad.newUserAccount(profile, username, password);
+
+        JOptionPane.showMessageDialog(null, "User account created successfully with role: " + selectedRole);
+
+        // Refresh table
+        refreshTable();
+    }//GEN-LAST:event_btnCreateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;

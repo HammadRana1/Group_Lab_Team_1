@@ -55,7 +55,7 @@ public class UserAccountDirectory {
     public ArrayList<UserAccount> getUserAccountList() {
         return useraccountlist;
     }
-
+    //RijurikSaha_DeleteAccount-24/10
     public void removeUserAccount(UserAccount selectedAccount) {
         useraccountlist.remove(selectedAccount);
     }
