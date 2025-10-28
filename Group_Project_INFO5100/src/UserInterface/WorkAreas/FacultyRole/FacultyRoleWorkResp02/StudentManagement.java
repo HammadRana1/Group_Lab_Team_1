@@ -8,6 +8,7 @@ import Business.Profiles.FacultyProfile;
 import Business.Profiles.StudentProfile;
 import Business.Profiles.StudentDirectory;
 import Business.University.Department.Department;
+import Business.University.Department.Department;
 import Business.University.CourseSchedule.CourseOffer;
 import Business.University.CourseSchedule.CourseLoad;
 import Business.University.CourseSchedule.CourseSchedule;
