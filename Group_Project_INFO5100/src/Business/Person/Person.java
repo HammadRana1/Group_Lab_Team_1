@@ -11,7 +11,7 @@ package Business.Person;
  */
 public class Person {
 
-    private String id;
+    String id;
     //RijurikSaha-RegisterPerson-10/24
     private String name;
     private String email;

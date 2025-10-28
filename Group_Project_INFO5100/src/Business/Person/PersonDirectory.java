@@ -20,6 +20,12 @@ public class PersonDirectory {
         personlist = new ArrayList();
 
     }
+    
+    public Person newPerson(String id) {
+    Person p = new Person(id);
+    personlist.add(p);
+    return p;
+}
 
     //RijurikSaha-RegisterPerson-10/24
     // For Admin or Faculty
