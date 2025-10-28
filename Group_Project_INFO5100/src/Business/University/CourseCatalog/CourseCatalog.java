@@ -4,7 +4,7 @@
  */
 package Business.University.CourseCatalog;
 
-import java.util.ArrayList;
+
 import Business.University.Department.Department;
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class CourseCatalog {
     
     public Course getCourseByNumber(String n){
         for(Course c: courselist){
-            if(c.getCOurseNumber().equals(n)) return c;
+            if(c.getCourseNumber().equals(n)) return c;
         }
         return null;
     }
