@@ -1,0 +1,288 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package UserInterface.WorkAreas.FacultyRole.FacultyRoleWorkResp02;
+import Business.Business;
+import Business.Profiles.FacultyProfile;
+import Business.University.CourseSchedule.CourseOffer;
+import Business.University.CourseSchedule.CourseSchedule;
+import Business.University.CourseSchedule.Seat;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Hammad
+ */
+public class TuitionInsight extends javax.swing.JPanel {
+    
+    private JPanel userProcessContainer;
+    private Business business;
+    private FacultyProfile facultyProfile;
+
+    /**
+     * Creates new form TuitionInsight
+     */
+    public TuitionInsight(JPanel container, Business bz, FacultyProfile fp) {
+        initComponents();
+        this.userProcessContainer = container;
+        this.business = bz;
+        this.facultyProfile = fp;
+        
+        setupSemester();
+        setupTableStyle();
+        
+        jComboBox1.addActionListener(e -> loadData());
+    }
+    
+     private void setupSemester() {
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("-- Select Semester --");
+        jComboBox1.addItem("Fall2025");
+        jComboBox1.addItem("Spring2026");
+        jComboBox1.addItem("Summer2026");
+    }
+     
+     private void loadData() {
+        String semester = (String) jComboBox1.getSelectedItem();
+        
+        if (semester == null || semester.equals("-- Select Semester --")) {
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTableEnrollment.getModel();
+        model.setRowCount(0);
+        
+        int totalEnrollment = 0;
+        int totalRevenue = 0;
+        
+        try {
+            CourseSchedule schedule = business.getDepartment().getCourseSchedule(semester);
+            if (schedule == null) return;
+            
+            // Get all courses
+            ArrayList<String> courseNumbers = new ArrayList<>();
+            courseNumbers.add("INFO 5100");
+            courseNumbers.add("INFO 6205");
+            courseNumbers.add("INFO 6150");
+            
+            for (String courseNum : courseNumbers) {
+                CourseOffer co = schedule.getCourseOfferByNumber(courseNum);
+                if (co == null) continue;
+                
+                int enrolled = 0;
+                int credits = 4;
+                int pricePerStudent = 6000;
+                
+                // Count actual enrolled students
+                ArrayList<Seat> seats = co.getSeatlist();
+                for (Seat seat : seats) {
+                    if (seat.isOccupied()) {
+                        enrolled++;
+                    }
+                }
+                
+                int revenue = enrolled * pricePerStudent;
+                totalEnrollment += enrolled;
+                totalRevenue += revenue;
+                
+                model.addRow(new Object[]{
+                    courseNum,
+                    credits,
+                    enrolled,
+                    "$" + pricePerStudent,
+                    "$" + revenue
+                });
+            }
+            
+            // Add TOTALS row
+            model.addRow(new Object[]{
+                "TOTALS",
+                "",
+                totalEnrollment,
+                "",
+                "$" + totalRevenue
+            });
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     
+     private void setupTableStyle() {
+        jTableEnrollment.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
+            @Override
+            public java.awt.Component getTableCellRendererComponent(
+                javax.swing.JTable table, Object value, boolean isSelected, 
+                boolean hasFocus, int row, int column) {
+                
+                java.awt.Component c = super.getTableCellRendererComponent(
+                    table, value, isSelected, hasFocus, row, column);
+                
+                // Make last row bold and green
+                if (row == table.getRowCount() - 1) {
+                    c.setFont(c.getFont().deriveFont(java.awt.Font.BOLD));
+                    c.setBackground(new java.awt.Color(220, 252, 231));
+                } else {
+                    c.setFont(c.getFont().deriveFont(java.awt.Font.PLAIN));
+                    c.setBackground(java.awt.Color.WHITE);
+                }
+                
+                return c;
+            }
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        lblTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableEnrollment = new javax.swing.JTable();
+        btnRevenue = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTitle.setText("Tuition/Enrollment Insights");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Select Semester");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTableEnrollment.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Course Title", "Credits", "Enrollments", "Price/Student", "Total Revenue"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableEnrollment);
+
+        btnRevenue.setText("Export Revenue Report");
+        btnRevenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRevenueActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRevenue)
+                    .addComponent(btnBack))
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevenueActionPerformed
+        // TODO add your handling code here:
+        if (jTableEnrollment.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "No data to export! Select a semester first.");
+        return;
+    }
+    
+    javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+    fileChooser.setSelectedFile(new java.io.File("TuitionReport_" + jComboBox1.getSelectedItem() + ".txt"));
+    
+    if (fileChooser.showSaveDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+        try {
+            java.io.PrintWriter writer = new java.io.PrintWriter(fileChooser.getSelectedFile());
+            
+            writer.println("═══════════════════════════════════");
+            writer.println("  TUITION & ENROLLMENT REPORT");
+            writer.println("═══════════════════════════════════");
+            writer.println();
+            writer.println("Semester: " + jComboBox1.getSelectedItem());
+            writer.println();
+            
+            for (int i = 0; i < jTableEnrollment.getRowCount(); i++) {
+                writer.println("Course: " + jTableEnrollment.getValueAt(i, 0));
+                writer.println("  Credits: " + jTableEnrollment.getValueAt(i, 1));
+                writer.println("  Enrollment: " + jTableEnrollment.getValueAt(i, 2));
+                writer.println("  Price/Student: " + jTableEnrollment.getValueAt(i, 3));
+                writer.println("  Total Revenue: " + jTableEnrollment.getValueAt(i, 4));
+                writer.println();
+            }
+            
+            writer.close();
+            JOptionPane.showMessageDialog(this, "Report saved successfully!");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error saving file!");
+        }
+    }
+    }//GEN-LAST:event_btnRevenueActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).show(userProcessContainer, "faculty");
+    }//GEN-LAST:event_btnBackActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRevenue;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableEnrollment;
+    private javax.swing.JLabel lblTitle;
+    // End of variables declaration//GEN-END:variables
+}
