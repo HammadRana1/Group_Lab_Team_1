@@ -14,7 +14,8 @@ import java.util.ArrayList;
  */
 public class CourseSchedule {
     
-    ArrayList<CourseOffer> schedule;
+   ArrayList<CourseOffer> schedule;
+    CourseCatalog coursecatalog;
     String semester;
 
     public CourseSchedule(String s, CourseCatalog cc) {
