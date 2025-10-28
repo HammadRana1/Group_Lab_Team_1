@@ -30,7 +30,7 @@ public class Business {
     //COmment Hammad
     
 
-
+// second comment2
     public Business(String n) {
         name = n;
 
