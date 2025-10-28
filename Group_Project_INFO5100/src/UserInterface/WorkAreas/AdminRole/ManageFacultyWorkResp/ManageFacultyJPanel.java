@@ -287,7 +287,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
         // Find or create CourseOffer object (temporary placeholder)
         CourseOffer co = new CourseOffer();
-        co.setCourseName(selectedCourse); // if you have this setter
+        co.setCourseName(selectedCourse);
 
         faculty.AssignAsTeacher(co);
 
