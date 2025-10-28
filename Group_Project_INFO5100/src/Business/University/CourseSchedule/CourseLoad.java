@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Hammad
  */
 public class CourseLoad {
-     String semester;
+    String semester;
     ArrayList<SeatAssignment> seatassignments;
     
     public CourseLoad(String s){
@@ -44,4 +44,5 @@ public class CourseLoad {
         public ArrayList<SeatAssignment> getSeatAssignments(){
             return seatassignments;
         }
+    
 }

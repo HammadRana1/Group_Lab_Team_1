@@ -9,7 +9,6 @@ import Business.Person.PersonDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.FacultyDirectory;
-import Business.University.Department.Department;
 
 import Business.UserAccounts.UserAccountDirectory;
 
@@ -27,10 +26,8 @@ public class Business {
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     
-    //COmment Hammad
-    
 
-// second comment2
+
     public Business(String n) {
         name = n;
 
@@ -62,10 +59,6 @@ public class Business {
     
     public FacultyDirectory getFacultyDirectory(){
         return facultydirectory;
-    }
-
-    public Department getDepartment() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

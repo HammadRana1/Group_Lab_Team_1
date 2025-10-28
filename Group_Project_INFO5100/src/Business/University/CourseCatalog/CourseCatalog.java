@@ -35,7 +35,7 @@ public class CourseCatalog {
     
     public Course getCourseByNumber(String n){
         for(Course c: courselist){
-            if(c.getCourseNumber().equals(n)) return c;
+            if(c.getCOurseNumber().equals(n)) return c;
         }
         return null;
     }
