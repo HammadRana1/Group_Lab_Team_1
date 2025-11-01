@@ -81,5 +81,9 @@ public class CourseOffer {
     public ArrayList<Seat> getSeatlist() {
         return seatlist;
     }
+
+    public Object getCourse() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
